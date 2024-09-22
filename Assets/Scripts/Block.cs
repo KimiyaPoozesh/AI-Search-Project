@@ -11,25 +11,29 @@ public class Block : MonoBehaviour
     private Vector3 velocity = Vector3.zero;  
     private Vector3 targetPosition;      
     private bool isMoving = false;       
-    private Vector3 initialPosition;  
+    private Vector3 initialPosition;
+    public Animator animatorPlayer;
     private void Start()
     {
         initialPosition = transform.position;
-        targetPosition = transform.position; 
+        targetPosition = transform.position;
+        if(animatorPlayer==null)
+            animatorPlayer = GetComponent<Animator>();
+        
     }
 
     private void Update()
     {
         if (isMoving)
         {
-           
-            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothing);
-
             
+            animatorPlayer.SetBool("isMoving", true);
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothing);
             if (Vector3.Distance(transform.position, targetPosition) < 0.01f)
             {
                 transform.position = targetPosition;  
                 isMoving = false;
+                animatorPlayer.SetBool("isMoving", false);
             }
         }
     }
@@ -37,9 +41,10 @@ public class Block : MonoBehaviour
     [ContextMenu(nameof(ResetPosition))]
     public void ResetPosition()
     {
+        
         transform.position = initialPosition; 
         targetPosition = initialPosition;     
-        isMoving = false;                     
+        isMoving = false; 
     }
 
     [ContextMenu(nameof(MoveUp))]

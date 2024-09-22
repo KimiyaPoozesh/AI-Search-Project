@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
     {
         for (int i = 0; i < levelObjects.Length; i++)
         {
-            levelObjects[i].GetComponent<StageManager>().ResetBlocks();
+            //levelObjects[i].GetComponent<StageManager>().ResetBlocks();
             levelObjects[i].SetActive(i == levelIndex);
         }
     }
