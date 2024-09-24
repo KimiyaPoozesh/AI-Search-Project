@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
@@ -9,12 +10,24 @@ public class GridManager : MonoBehaviour
     public int gridSizeY = 6;
     private GameObject[,] gridTiles;
 
-    void Start()
+   
+
+    private void Start()
     {
-        GenerateGrid();
+        //singleton
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
-    
-    void GenerateGrid()
+
+    public static GridManager instance { get; set; }
+
+    public void GenerateGrid()
     {
         Renderer backgroundRenderer = backgroundPlane.GetComponent<Renderer>();
         if (backgroundRenderer == null)
