@@ -10,7 +10,6 @@ public class UIManager : MonoBehaviour
     public Button[] levelButtons;  
     [SerializeField] private GameObject levelsButton;
     [SerializeField] private GameObject WelcomeText;
-
     private int levelIndex;
     //add two virtual camera
     [SerializeField] private CinemachineVirtualCamera menucam;
@@ -55,8 +54,46 @@ public class UIManager : MonoBehaviour
         levelObjects[levelIndex].GetComponent<StageManager>().ResetBlocks();
     }
     
-    public void CalculateResult()
+    public void ExecuteMove(int blockId, string direction)
     {
-       
+        Block blockToMove = null;
+        
+        
+        foreach (var block in levelObjects[levelIndex].GetComponent<StageManager>().blocks)
+        {
+            if (block.id == blockId)
+            {
+                blockToMove = block;
+                break;
+            }
+        }
+
+      
+        if (blockToMove != null)
+        {
+            switch (direction.ToLower())
+            {
+                case "up":
+                    blockToMove.MoveUp();
+                    break;
+                case "down":
+                    blockToMove.MoveDown();
+                    break;
+                case "left":
+                    blockToMove.MoveLeft();
+                    break;
+                case "right":
+                    blockToMove.MoveRight();
+                    break;
+                default:
+                    Debug.LogWarning("Invalid direction: " + direction);
+                    break;
+            }
+            Debug.Log($"Piece {blockId} moved {direction}");
+        }
+        else
+        {
+            Debug.LogWarning("Block with ID " + blockId + " not found.");
+        }
     }
 }

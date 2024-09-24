@@ -39,6 +39,7 @@ class Solution:
                 state = state.parent
             for state in queue[1:]:
                 output['moves'].append({"piece": state.piece, "direction": state.direction})
+            output['moves'].append({"piece": self.state.piece, "direction": self.state.direction})
 
         with open(f'{name}.json', 'w') as json_file:
             json.dump(output, json_file, indent=4)
