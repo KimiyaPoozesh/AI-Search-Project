@@ -67,8 +67,7 @@ public class UIManager : MonoBehaviour
                 break;
             }
         }
-
-      
+        
         if (blockToMove != null)
         {
             switch (direction.ToLower())
@@ -95,5 +94,22 @@ public class UIManager : MonoBehaviour
         {
             Debug.LogWarning("Block with ID " + blockId + " not found.");
         }
+    }
+
+    public void CompleteState()
+    {
+        levelObjects[levelIndex].GetComponent<StageManager>().OnDone(levelButtons[levelIndex]);
+        for (int i=0 ; i<levelObjects.Length ; i++)
+        {
+            if (!levelObjects[i].GetComponent<StageManager>().isComplete)
+            {
+                ShowLevel(i);
+                return;
+            }
+        }
+        
+        //if no level is left to be shown
+        gamecam.Priority = 0;
+
     }
 }

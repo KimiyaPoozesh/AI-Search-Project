@@ -45,6 +45,7 @@ public class JSONReader : MonoBehaviour
             uiManager.ExecuteMove(move.piece, move.direction);
             yield return new WaitForSeconds(2f); // Wait 1 second between moves (can be adjusted)
         }
+        uiManager.CompleteState();
     }
 }
 

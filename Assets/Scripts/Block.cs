@@ -13,12 +13,14 @@ public class Block : MonoBehaviour
     private bool isMoving = false;       
     private Vector3 initialPosition;
     public Animator animatorPlayer;
+    private AudioSource m_AudioClip;
     private void Start()
     {
         initialPosition = transform.position;
         targetPosition = transform.position;
         if(animatorPlayer==null)
             animatorPlayer = GetComponent<Animator>();
+        m_AudioClip = GetComponent<AudioSource>();
         
     }
 
@@ -27,13 +29,27 @@ public class Block : MonoBehaviour
         if (isMoving)
         {
             
-            animatorPlayer.SetBool("isMoving", true);
+        
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothing);
+        
+          
+            if (!m_AudioClip.isPlaying)
+            {
+                m_AudioClip.Play();
+            }
+            if(!animatorPlayer.GetBool("isMoving"))
+            {
+                animatorPlayer.SetBool("isMoving", true);
+            }
+
+            // Check if the object has reached its destination
             if (Vector3.Distance(transform.position, targetPosition) < 0.01f)
             {
-                transform.position = targetPosition;  
+                transform.position = targetPosition;
                 isMoving = false;
+
                 animatorPlayer.SetBool("isMoving", false);
+                m_AudioClip.Stop();
             }
         }
     }

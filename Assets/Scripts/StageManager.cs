@@ -6,12 +6,14 @@ public class StageManager : MonoBehaviour
 {
     
     public Block[] blocks;
-    private bool isComplete = false;
+    public bool isComplete = false;
+    [SerializeField] private Light m_Light;
     public void ResetBlocks()
     {
         foreach (Block block in blocks)
         {
             block.ResetPosition();
+            
         }
     }
     
@@ -20,6 +22,7 @@ public class StageManager : MonoBehaviour
     {
         isComplete = true;
         button.GetComponent<Image>().color = Color.green;
+        m_Light.color = Color.green;
     }
 
 }
