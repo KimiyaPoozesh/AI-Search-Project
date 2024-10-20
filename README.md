@@ -1,4 +1,5 @@
 # AI Search Project
+This project was developed as part of an AI workshop aimed at educating students about various search algorithms and their practical applications in problem-solving.
 
 ## Project Overview
 
