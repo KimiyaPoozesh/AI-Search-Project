@@ -12,3 +12,8 @@ class State:
 
     def __hash__(self):
         return self.board.__hash__()
+
+    def __lt__(self, other):
+        return 0
+    def __h_n__(self):
+        return (self.board.width - 1) - self.board.red_block.position[1][1]
