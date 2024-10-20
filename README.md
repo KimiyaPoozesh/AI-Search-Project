@@ -3,7 +3,7 @@ This project was developed as part of an AI workshop aimed at educating students
 
 ## Project Overview
 
-This project showcases the implementation of the **A* (A-star) search algorithm** in Unity, focusing on its application for pathfinding in a grid environment. The primary objective is to efficiently navigate from a starting point to a designated target while dynamically avoiding obstacles. Users can experiment with a variety of search algorithms, including:
+This project showcases the implementation of the **different search algorithm** in Unity, focusing on its application for pathfinding in a grid environment. The primary objective is to efficiently navigate from a starting point to a designated target while dynamically avoiding obstacles. Users can experiment with a variety of search algorithms, including:
 
 - Depth-First Search (DFS)
 - Depth-First Search with Expansion (DFS + Exp)
