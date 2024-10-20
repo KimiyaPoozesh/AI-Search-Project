@@ -40,7 +40,7 @@ To visualize the A* algorithm steps, follow these steps:
    - Execute the `main.py` script in your preferred Python environment. This will generate a JSON file containing valid moves for your test case.
 
 2. **Match Test Case Names**:
-   - Ensure that the name of the generated JSON file matches the test case you have loaded in the Unity application.
+   - Ensure that the name of chosen test case in main file matches the test case you have loaded in the Unity application.
 
 3. **Launch the Unity Application**:
    - Open the Unity application and load the desired scene.
