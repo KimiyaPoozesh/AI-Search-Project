@@ -11,13 +11,15 @@ class Search:
         queue = []
         state = prb.initState
         queue.append(state)
-        max_counter = 200
+        max_counter =20000
         while len(queue) > 0 or max_counter > 0:
             max_counter -= 1
             state = queue.pop(0)
             neighbors = prb.successor(state)
             for c in neighbors:
                 if prb.goal_test(c):
+                    print(max_counter)
                     return Solution(c, prb, start_time)
                 queue.append(c)
+        
         return None

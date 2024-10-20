@@ -7,28 +7,35 @@ using UnityEngine;
 
 public class JSONReader : MonoBehaviour
 {
-    public string jsonFilePath = "Python Part/test1.json"; // JSON file path
-    public UIManager uiManager; // Reference to UIManager to execute the moves
+    public string jsonFilePath; // JSON file path
+    public UIManager uiManager; 
     
-    public TMP_Text nameText; // UI Text for the test case name
-    public TMP_Text durationText; // UI Text for the duration
-    public TMP_Text statusText; // UI Text for the status of is_done
-    
+    public TMP_Text nameText;
+    public TMP_Text durationText; 
+    public TMP_Text statusText;
+    public TMP_Text path;
+    void Start()
+    {
+        jsonFilePath = Path.Combine(Application.persistentDataPath, "solution.json");
+        Debug.Log("Persistent Data Path: " + Application.persistentDataPath);
+       path.text="Use this path in your python: " + jsonFilePath;
+    }
 
     public void ReadAndHandleJson()
     {
         // Read the JSON file
         string jsonContent = File.ReadAllText(jsonFilePath);
         
-        // Parse the JSON content into a C# object
         JsonData jsonData = JsonConvert.DeserializeObject<JsonData>(jsonContent);
         
         nameText.text = "Name: " + jsonData.algorithm;
         durationText.text = "Time: " + jsonData.duration;
         statusText.text = jsonData.is_done ? "Status: Completed" : "Status: Incomplete";
+        int testCaseNumber = ExtractTestCaseNumber(jsonData.test_case);
+        Debug.Log(testCaseNumber);
+        
 
-        // If is_done is true, execute the moves, otherwise, just display the info
-        if (jsonData.is_done)
+        if (jsonData.is_done && testCaseNumber == uiManager.levelIndex +1)
         {
             StartCoroutine(ExecuteMovesSequentially(jsonData.moves));
            
@@ -43,18 +50,23 @@ public class JSONReader : MonoBehaviour
         foreach (var move in moves)
         {
             uiManager.ExecuteMove(move.piece, move.direction);
-            yield return new WaitForSeconds(2f); // Wait 1 second between moves (can be adjusted)
+            yield return new WaitForSeconds(2f); 
         }
         uiManager.CompleteState();
     }
+    
+    private int ExtractTestCaseNumber(string testCase)
+    {
+        string numberPart = testCase.Split('.')[0]; 
+        return int.Parse(numberPart);
+    }
 }
 
-// Data structure matching the JSON structure
 [System.Serializable]
 public class JsonData
 {
     public string algorithm;
-    public string test_case; // This will be used as the "name"
+    public string test_case;
     public string duration;
     public List<Move> moves;
     public bool is_done;

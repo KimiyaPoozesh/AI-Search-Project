@@ -42,7 +42,6 @@ public class Block : MonoBehaviour
                 animatorPlayer.SetBool("isMoving", true);
             }
 
-            // Check if the object has reached its destination
             if (Vector3.Distance(transform.position, targetPosition) < 0.01f)
             {
                 transform.position = targetPosition;

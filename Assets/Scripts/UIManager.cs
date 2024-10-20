@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     public Button[] levelButtons;  
     [SerializeField] private GameObject levelsButton;
     [SerializeField] private GameObject WelcomeText;
-    private int levelIndex;
+    public int levelIndex;
     //add two virtual camera
     [SerializeField] private CinemachineVirtualCamera menucam;
     [SerializeField] private CinemachineVirtualCamera gamecam;

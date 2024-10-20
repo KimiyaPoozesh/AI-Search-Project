@@ -11,20 +11,21 @@ class Solution:
         self.duration = datetime.now() - start_time
 
     def print_path(self):  # this for show path of every search how it's done
-        queue = []
-        state = self.state.parent
-        while state is not None:
-            queue.insert(0, state)
-            state = state.parent
-        print('Init State')
-        self.problem.print_state(queue[0])
-        for state in queue[1:]:
-            print('---------\n')
-            self.problem.print_state(state)
-        print('---------\n')
-        print('Solution State')
-        self.problem.print_state(self.state)
-        print('duration = ' + str(self.duration))
+        return
+        # queue = []
+        # state = self.state.parent
+        # while state is not None:
+        #     queue.insert(0, state)
+        #     state = state.parent
+        # print('Init State')
+        # self.problem.print_state(queue[0])
+        # for state in queue[1:]:
+        #     print('---------\n')
+        #     self.problem.print_state(state)
+        # print('---------\n')
+        # print('Solution State')
+        # self.problem.print_state(self.state)
+        # print('duration = ' + str(self.duration))
 
     def save_to_json_file(self, name: str, algo: str, test_name: str):
         output = {'algorithm': algo, 'test_case': test_name, 'duration': str(self.duration), "moves": [],
